@@ -17,8 +17,8 @@ class Trie {
   }
 
   insert (string) {
-    let characters = string.toLowerCase().split('');
     let currentNode = this.rootNode;
+    let characters = string.toLowerCase().split('');
 
     characters.forEach(character => {
       if (!currentNode.children[character]) {
@@ -30,6 +30,19 @@ class Trie {
     if (!currentNode.isWord) {
       this.wordCount++;
       currentNode.isWord = true;
+    }
+  }
+
+  select(string) {
+    let currentNode = this.rootNode;
+    let lettersArr = string.toLowerCase().split('');
+
+    lettersArr.forEach(character => {
+      currentNode = currentNode.children[character];
+    });
+
+    if(currentNode.isWord) {
+      currentNode.selectCount++
     }
   }
 
@@ -64,22 +77,24 @@ class Trie {
     // navigate
 
     // get suggestions(prefix, currNode)
-      // is this a word if it is then
-      // check and see if it has children
-      // recurisvily call on it
+    // is this a word if it is then
+    // check and see if it has children
+    // recursively call on it
 
     // If string is already in this.suggestions
     // if (trie.) {
     //   this.suggestions.push(string)
     // }
 
+    // find lastLetter
     lettersArr.forEach(letter => {
       // If current Nodes has a child that === the letter
       if (currentNode.children) {
         currentNode = currentNode.children[letter];
-      } else {
-        return null;
       }
+      // else {
+      //   return null;
+      // }
     });
 
     const findWord = (prefix, currentNode) => {
@@ -88,7 +103,7 @@ class Trie {
         suggestions.push(prefix);
       }
 
-      if(currentNode.children) {
+      if (currentNode.children) {
         let childrenKeys = Object.keys(currentNode.children);
         childrenKeys.forEach(child => {
           let childNode = currentNode.children[child];
@@ -100,21 +115,14 @@ class Trie {
     };
 
     findWord(string, currentNode);
+    // make an object
+      // keys will be words entered (inserted)
+      // values will be amount of times selected
+
+    
+
     return suggestions;
-
-
-
-    // checkChildren(currentNode) {
-    // Object.keys = on lastletter
-    // Everychild needs to
-    // }
-
-    // return array of suggestions
   }
-
-  // addSuggestion(word) {
-  //   this.suggestions.push(word)
-  // }
 
 
 }

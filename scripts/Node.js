@@ -8,6 +8,7 @@ export default class Node {
     this.letter = character;
     this.isWord = false;
     this.children = {};
+    this.selectCount = 0;
   }
 }
 
