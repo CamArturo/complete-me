@@ -6,8 +6,9 @@ export default class Node {
     // // it is only get a next value with we push
     // this.next = null;
     this.letter = character;
-    this.wordEnd = false;
+    this.isWord = false;
     this.children = {};
+    this.selectCount = 0;
   }
 }
 
