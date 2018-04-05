@@ -64,7 +64,7 @@ class Trie {
   }
 
   suggest (string) {
-    let suggestions = [];
+    let suggestions = {};
     let currentNode = this.rootNode;
     let lettersArr = string.toLowerCase().split('');
     // let prefix = string.slice(0, string.length - 1);
@@ -86,6 +86,7 @@ class Trie {
     //   this.suggestions.push(string)
     // }
 
+
     // find lastLetter
     lettersArr.forEach(letter => {
       // If current Nodes has a child that === the letter
@@ -100,7 +101,20 @@ class Trie {
     const findWord = (prefix, currentNode) => {
       if (currentNode.isWord) {
         // this.suggestions.push(word);
-        suggestions.push(prefix);
+        // suggestions.push(prefix);
+        // add to object a key of the prefix.
+        // the value should be the selectCount
+
+        console.log('Prefix is: ' + prefix);
+        console.log('CurrentNode SelectCount is: ' + currentNode.selectCount);
+        console.log(suggestions);
+        console.log('Suggestions Prefix : ' + suggestions['bat']);
+        let tempNum = currentNode.selectCount;
+        if (!suggestions.hasOwnProperty(prefix)) {
+          suggestions[prefix] = 0;
+        }
+        suggestions[prefix] = currentNode.selectCount;
+        suggestions[prefix] = tempNum;
       }
 
       if (currentNode.children) {
@@ -114,12 +128,12 @@ class Trie {
       }
     };
 
-    findWord(string, currentNode);
-    // make an object
-      // keys will be words entered (inserted)
-      // values will be amount of times selected
+    // suggestions will stay an array with all objects
+    // suggestions.sort
+    //
 
-    
+    findWord(string, currentNode);
+    console.log(suggestions);
 
     return suggestions;
   }
