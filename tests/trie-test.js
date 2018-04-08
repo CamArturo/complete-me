@@ -15,16 +15,8 @@ describe('Trie Test', () => {
     trie = new Trie();
   });
 
-  // it.skip('should have a rootNode node defaulted to null', () => {
-  //   expect(trie.rootNode).to.equal(null);
-  // });
-  //
-  // it('should have a rootNode node default to new Node', () => {
-  //   expect(trie.rootNode).to.equal(new Node());
-  // });
-
   describe('select', () => {
-    it('should increase selectCount on Node',() => {
+    it('should increase selectCount on Node', () => {
       trie.insert('bat');
       trie.insert('baton');
       trie.select('bat');
@@ -32,7 +24,7 @@ describe('Trie Test', () => {
       trie.select('bat');
 
       let actualOutput = trie.rootNode.children['b'].children['a'].children['t'].selectCount;
-      expect(actualOutput).to.deep.equal(3)
+      expect(actualOutput).to.deep.equal(3);
     });
 
     it('should return an array with most selected words(prefixes) in beginning of suggestionArr', () => {
@@ -40,17 +32,13 @@ describe('Trie Test', () => {
       trie.insert('bat');
       trie.insert('bath');
 
-      // trie.suggest('bat');
-      // to increase selectCount on the Node
       trie.select('bat');
       trie.select('bat');
       trie.select('bath');
 
-      // return highest suggestions first
-      // trie.suggest('bat');
       let actualOutput = trie.suggest('bat');
-      // console.log(actualOutput);
       // console.log(JSON.stringify(trie, null, 2));
+
       expect(actualOutput).to.deep.equal(['bat', 'bath', 'bats']);
     });
   });
@@ -112,42 +100,40 @@ describe('Trie Test', () => {
       // trie.insert('bathtub');
       trie.suggest('bat');
       let actualOutput = trie.suggest('bat');
-      // console.log(actualOutput)
-
       // console.log(JSON.stringify(trie, null, 2));
       expect(actualOutput).to.deep.equal(['bat', 'baton', 'batter']);
     });
+  });
 
-    describe('populate', () => {
-      it.skip('should populate 234,371 words', () => {
-        trie.populate(dictionary);
-        expect(trie.wordCount).to.equal(234371);
-      });
-      // if give suggestions from dictionary for a large data set
+  describe('populate', () => {
+    it.skip('should populate 234,371 words', () => {
+      trie.populate(dictionary);
+      expect(trie.wordCount).to.equal(234371);
+    });
+    // if give suggestions from dictionary for a large data set
 
+  });
+
+  describe('delete', () => {
+    it.skip('should decrease wordcount', () => {
+      trie.insert('bat');
+      trie.insert('baton');
+      trie.insert('batter');
+      trie.insert('bats');
+      trie.delete('bat');
+      expect(trie.wordCount).to.equal(3);
     });
 
-    describe('delete', () => {
-      it.skip('should decrease wordcount', () => {
-        trie.insert('bat');
-        trie.insert('baton');
-        trie.insert('batter');
-        trie.insert('bats');
-        trie.delete('bat');
-        expect(trie.wordCount).to.equal(3);
-      });
-
-      it.skip('should make current word not a word', () => {
-        trie.insert('bat');
-        // trie.insert('baton');
-        // trie.insert('batter');
-        // trie.insert('bats');
-        trie.insert('car');
-        trie.delete('car');
-        // console.log(JSON.stringify(trie, null, 2));
-        expect(trie.rootNode.children['c'].children['a'].children['r'].isWord).to.equal(false);
-      });
-
+    it.skip('should make current word not a word', () => {
+      trie.insert('bat');
+      // trie.insert('baton');
+      // trie.insert('batter');
+      // trie.insert('bats');
+      trie.insert('car');
+      trie.delete('car');
+      // console.log(JSON.stringify(trie, null, 2));
+      expect(trie.rootNode.children['c'].children['a'].children['r'].isWord).to.equal(false);
     });
+
   });
 });

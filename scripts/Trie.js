@@ -5,15 +5,13 @@ class Trie {
   constructor () {
     this.rootNode = new Node;
     this.wordCount = 0;
-    // this.isWord = null;
     this.suggestions = [];
-    // this.wordCount = 0;
   }
 
-  populate(wordArr) {
-    wordArr.forEach( word => {
-      this.insert(word)
-    })
+  populate (wordArr) {
+    wordArr.forEach(word => {
+      this.insert(word);
+    });
   }
 
   insert (string) {
@@ -33,7 +31,7 @@ class Trie {
     }
   }
 
-  select(string) {
+  select (string) {
     let currentNode = this.rootNode;
     let lettersArr = string.toLowerCase().split('');
 
@@ -41,12 +39,12 @@ class Trie {
       currentNode = currentNode.children[character];
     });
 
-    if(currentNode.isWord) {
-      currentNode.selectCount++
+    if (currentNode.isWord) {
+      currentNode.selectCount++;
     }
   }
 
-  delete(string) {
+  delete (string) {
     let characters = string.toLowerCase().split('');
     let currentNode = this.rootNode;
 
@@ -64,38 +62,18 @@ class Trie {
   }
 
   suggest (string) {
-    let suggestions = {};
+    let suggestions = [];
     let currentNode = this.rootNode;
     let lettersArr = string.toLowerCase().split('');
-    // let prefix = string.slice(0, string.length - 1);
-    // let lastLetter = lettersArr[lettersArr.length - 1];
-
     if (!currentNode.children[lettersArr[0]]) {
       return 'There are no matching words';
     }
 
-    // navigate
-
-    // get suggestions(prefix, currNode)
-    // is this a word if it is then
-    // check and see if it has children
-    // recursively call on it
-
-    // If string is already in this.suggestions
-    // if (trie.) {
-    //   this.suggestions.push(string)
-    // }
-
-
-    // find lastLetter
     lettersArr.forEach(letter => {
       // If current Nodes has a child that === the letter
       if (currentNode.children) {
         currentNode = currentNode.children[letter];
       }
-      // else {
-      //   return null;
-      // }
     });
 
     const findWord = (prefix, currentNode) => {
@@ -104,17 +82,14 @@ class Trie {
         // suggestions.push(prefix);
         // add to object a key of the prefix.
         // the value should be the selectCount
+        let selectCount = currentNode.selectCount;
 
-        console.log('Prefix is: ' + prefix);
-        console.log('CurrentNode SelectCount is: ' + currentNode.selectCount);
-        console.log(suggestions);
-        console.log('Suggestions Prefix : ' + suggestions['bat']);
-        let tempNum = currentNode.selectCount;
-        if (!suggestions.hasOwnProperty(prefix)) {
-          suggestions[prefix] = 0;
+        if (!suggestions.includes(prefix)) {
+          suggestions.push({
+            [prefix]: prefix,
+            selectCount: selectCount
+          });
         }
-        suggestions[prefix] = currentNode.selectCount;
-        suggestions[prefix] = tempNum;
       }
 
       if (currentNode.children) {
@@ -123,21 +98,21 @@ class Trie {
           let childNode = currentNode.children[child];
           let newString = prefix + child;
 
-          findWord(newString, childNode)
-        })
+          findWord(newString, childNode);
+        });
       }
     };
 
-    // suggestions will stay an array with all objects
-    // suggestions.sort
-    //
-
     findWord(string, currentNode);
-    console.log(suggestions);
-
-    return suggestions;
+    suggestions.sort((a, b) => {
+      return b.selectCount - a.selectCount;
+    });
+    let finalSuggestions = suggestions.map(word => {
+      let key = Object.keys(word);
+      return key[0];
+    });
+    return finalSuggestions;
   }
-
 
 }
 
