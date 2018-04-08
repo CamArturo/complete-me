@@ -11,9 +11,6 @@ describe('Node Test', () => {
     node = new Node();
   });
 
-  // should complete word prop as false
-  // children prop empty
-
   it('should be a thing', () => {
     expect(node).to.exist;
   });
@@ -24,10 +21,6 @@ describe('Node Test', () => {
 
   it('should have children data type of object', () => {
     assert.isObject(node.children, 'node children should be objects');
-  });
-
-  it.skip('should have a rootNode node defaulted to null', () => {
-    expect(node.rootNode).to.equal(null);
   });
 
   it('should not be the end of the word by default', () => {
