@@ -45,14 +45,14 @@ describe('Trie Test', () => {
 
   describe('insert', () => {
 
-    it.skip('should increase count when insert is called', () => {
+    it('should increase count when insert is called', () => {
       trie.insert('abc');
       trie.insert('def');
       trie.insert('egh');
       expect(trie.wordCount).to.equal(3);
     });
 
-    it.skip('should not increase count when string is already in trie', () => {
+    it('should not increase count when string is already in trie', () => {
       trie.insert('abc');
       trie.insert('abc');
       trie.insert('def');
@@ -60,7 +60,7 @@ describe('Trie Test', () => {
       expect(trie.wordCount).to.equal(3);
     });
 
-    it.skip('should update isWord to true', () => {
+    it('should update isWord to true', () => {
       trie.insert('car');
       expect(trie.rootNode.children['c'].children['a'].children['r'].isWord).to.equal(true);
     });
@@ -68,7 +68,7 @@ describe('Trie Test', () => {
 
   describe('suggest', () => {
 
-    it.skip('should be able to suggest words based on prefix entered', () => {
+    it('should be able to suggest words based on prefix entered', () => {
       trie.insert('bat');
       trie.insert('baton');
       trie.insert('batter');
@@ -78,7 +78,7 @@ describe('Trie Test', () => {
       expect(suggest).to.deep.equal(['bat', 'baton', 'batter', 'bats']);
     });
 
-    it.skip('should return all words possible with letters entered', () => {
+    it('should return all words possible with letters entered', () => {
       // set up world
       trie.insert('bat');
       // do an action
@@ -89,7 +89,7 @@ describe('Trie Test', () => {
       expect(actualOutput).to.deep.equal(['bat']);
     });
 
-    it.skip('should be able to offer some suggestions based on a word prefix', () => {
+    it('should be able to offer some suggestions based on a word prefix', () => {
       trie.insert('bat');
       trie.insert('baton');
       trie.insert('batter');
@@ -106,7 +106,7 @@ describe('Trie Test', () => {
   });
 
   describe('populate', () => {
-    it.skip('should populate 234,371 words', () => {
+    it('should populate 234,371 words', () => {
       trie.populate(dictionary);
       expect(trie.wordCount).to.equal(234371);
     });
@@ -115,7 +115,7 @@ describe('Trie Test', () => {
   });
 
   describe('delete', () => {
-    it.skip('should decrease wordcount', () => {
+    it('should decrease wordcount', () => {
       trie.insert('bat');
       trie.insert('baton');
       trie.insert('batter');
@@ -124,7 +124,7 @@ describe('Trie Test', () => {
       expect(trie.wordCount).to.equal(3);
     });
 
-    it.skip('should make current word not a word', () => {
+    it('should make current word not a word', () => {
       trie.insert('bat');
       // trie.insert('baton');
       // trie.insert('batter');

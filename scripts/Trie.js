@@ -70,7 +70,6 @@ class Trie {
     }
 
     lettersArr.forEach(letter => {
-      // If current Nodes has a child that === the letter
       if (currentNode.children) {
         currentNode = currentNode.children[letter];
       }
@@ -78,10 +77,6 @@ class Trie {
 
     const findWord = (prefix, currentNode) => {
       if (currentNode.isWord) {
-        // this.suggestions.push(word);
-        // suggestions.push(prefix);
-        // add to object a key of the prefix.
-        // the value should be the selectCount
         let selectCount = currentNode.selectCount;
 
         if (!suggestions.includes(prefix)) {
@@ -107,6 +102,7 @@ class Trie {
     suggestions.sort((a, b) => {
       return b.selectCount - a.selectCount;
     });
+
     let finalSuggestions = suggestions.map(word => {
       let key = Object.keys(word);
       return key[0];
