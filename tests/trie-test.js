@@ -8,9 +8,10 @@ const fs = require('fs');
 const text = '/usr/share/dict/words';
 const dictionary = fs.readFileSync(text).toString().trim().split('\n');
 
+// 'Test' is redundant
 describe('Trie Test', () => {
   let trie;
-
+// good use of beforeEach
   beforeEach(() => {
     trie = new Trie();
   });
@@ -22,12 +23,12 @@ describe('Trie Test', () => {
       trie.select('bat');
       trie.select('bat');
       trie.select('bat');
-
+// good separation here
       let actualOutput = trie.rootNode.children['b'].children['a'].children['t'].selectCount;
       expect(actualOutput).to.deep.equal(3);
     });
 
-    it('should return an array with most selected words(prefixes) in beginning of suggestionArr', () => {
+    it.only('should return an array with most selected words(prefixes) in beginning of suggestionArr', () => {
       trie.insert('bats');
       trie.insert('bat');
       trie.insert('bath');
@@ -106,6 +107,7 @@ describe('Trie Test', () => {
   });
 
   describe('populate', () => {
+    // this test is failing
     it('should populate 234,371 words', () => {
       trie.populate(dictionary);
       expect(trie.wordCount).to.equal(234371);

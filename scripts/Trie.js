@@ -75,12 +75,19 @@ class Trie {
       }
     });
 
+    // if this function doesn't depend on the context it's in (it shouldn't)
+    // move it out to it's own method
+    
     const findWord = (prefix, currentNode) => {
       if (currentNode.isWord) {
         let selectCount = currentNode.selectCount;
 
         if (!suggestions.includes(prefix)) {
           suggestions.push({
+            // I'd suggest not making the key of this line [prefix]
+            // you know what it is, so just name it 'prefix'
+            // then you don't need to do any object.keys stuff
+            // on line 114
             [prefix]: prefix,
             selectCount: selectCount
           });

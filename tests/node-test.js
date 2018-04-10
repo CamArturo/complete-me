@@ -20,6 +20,8 @@ describe('Node Test', () => {
   });
 
   it('should have children data type of object', () => {
+    // no need to craft your own message
+    // chai's messages should suffice
     assert.isObject(node.children, 'node children should be objects');
   });
 
